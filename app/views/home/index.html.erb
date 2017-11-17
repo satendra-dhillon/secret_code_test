@@ -1,0 +1,4 @@
+Welcome to home page!!!!
+<%if current_user.roles.pluck(:name).include?("admin")%>
+	<%=link_to "Secret Code", secret_codes_path%>
+<%end%>

@@ -1,0 +1,27 @@
+<% if current_user.roles.pluck(:name).include?("admin") %>
+	<table>
+		<thead>
+			<th>SecretCode</th>
+			<th>Associated User Email</th>
+		</thead>
+		<tbody>
+			<%@secret_codes.each do |secret_code|%>
+				<tr>
+					<td>
+						<%=secret_code.code%>
+					</td>
+					<td>
+						<%=secret_code.user.try(:email)%>
+					</td>				
+					
+				</tr>
+			<%end%>
+		</tbody>
+	</table>
+
+
+	<%= form_tag genrate_secret_code_secret_codes_path do %>
+		<%= select_tag :range, options_for_select([0, 10, 20, 50, 100])%>
+	  <div><%= submit_tag 'Genrate SecretCode' %></div>
+	<% end %>
+<% end %>
